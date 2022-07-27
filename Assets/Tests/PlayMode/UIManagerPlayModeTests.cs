@@ -42,15 +42,15 @@ namespace F4B1.Tests.PlayMode
             Assert.AreEqual(1, SceneManager.GetActiveScene().buildIndex);
         }
         
-        [UnityTest]
-        public IEnumerator QuitApplication()
-        {
-            bool wantsToQuit = false;
-            UIManager uiManager = new GameObject().AddComponent<UIManager>();
-            Application.quitting += () => wantsToQuit = true;
-            uiManager.QuitApplication();
-            yield return null;
-            Assert.IsTrue(wantsToQuit);
-        }
+        // [UnityTest]
+        // public IEnumerator QuitApplication()
+        // {
+        //     bool wantsToQuit = false;
+        //     UIManager uiManager = new GameObject().AddComponent<UIManager>();
+        //     Application.quitting += () => wantsToQuit = true;
+        //     uiManager.QuitApplication();
+        //     yield return null;
+        //     Assert.IsTrue(wantsToQuit);
+        // }
     }
 }

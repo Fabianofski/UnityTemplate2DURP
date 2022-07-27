@@ -11,7 +11,6 @@ namespace F4B1.UI
         [SerializeField] private BoolVariable pauseToggled;
         public BoolVariable PauseToggled
         {
-            get => pauseToggled;
             set => pauseToggled = value;
         }
         

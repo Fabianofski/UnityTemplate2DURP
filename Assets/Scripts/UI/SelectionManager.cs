@@ -7,24 +7,28 @@ namespace F4B1.UI
     {
         private EventSystem _eventSystem;
         [SerializeField] private GameObject firstSelected;
-        private GameObject _lastSelectedGameObject;
+        public GameObject FirstSelected
+        {
+            set => firstSelected = value;
+        }
+        public GameObject LastSelectedGameObject { get; private set; }
 
         private void Start()
         {
             _eventSystem = FindObjectOfType<EventSystem>();
-            _lastSelectedGameObject = firstSelected;
+            LastSelectedGameObject = firstSelected;
         }
 
         public void OnNavigate()
         {
             if (_eventSystem.currentSelectedGameObject != null) return;
-            _eventSystem.SetSelectedGameObject(_lastSelectedGameObject);
+            _eventSystem.SetSelectedGameObject(LastSelectedGameObject);
         }
         
-        private void OnMouseMove()
+        public void OnMouseMove()
         {
             if (_eventSystem.currentSelectedGameObject == null) return;
-            _lastSelectedGameObject = _eventSystem.currentSelectedGameObject;
+            LastSelectedGameObject = _eventSystem.currentSelectedGameObject;
         }
     }
 }
