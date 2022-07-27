@@ -1,10 +1,11 @@
 {
     "name": "PlayMode",
-    "rootNamespace": "",
+    "rootNamespace": "F4B1",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Scripts"
+        "Scripts",
+        "UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
