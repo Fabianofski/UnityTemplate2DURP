@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using F4B1.UI;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -11,84 +12,77 @@ namespace F4B1.Tests.PlayMode
 {
     public class SelectionManagerPlayModeTests
     {
-        [UnityTest]
-        public IEnumerator Start()
+        private EventSystem _eventSystem;
+        private GameObject _firstSelected;
+        private SelectionManager _selectionManager;
+        
+        [UnitySetUp]
+        public IEnumerator Setup()
         {
-            new GameObject().AddComponent<EventSystem>();
-            GameObject firstSelected = new GameObject();
-            SelectionManager selectionManager = new GameObject().AddComponent<SelectionManager>();
-            selectionManager.FirstSelected = firstSelected;
+            _eventSystem = new GameObject().AddComponent<EventSystem>();
+            _firstSelected = new GameObject();
+            _selectionManager = new GameObject().AddComponent<SelectionManager>();
+            _selectionManager.FirstSelected = _firstSelected;
             yield return null;
-            
-            Assert.AreEqual(firstSelected,  selectionManager.LastSelectedGameObject);
+        }
+
+        [UnityTearDown]
+        public IEnumerator TearDown()
+        {
+            Object.Destroy(_eventSystem);
+            Object.Destroy(_firstSelected);
+            Object.Destroy(_selectionManager.gameObject);
+            yield return null;
         }
         
-        [UnityTest]
-        public IEnumerator OnNavigate_NothingSelected_SelectControl()
+        [Test]
+        public void Start()
         {
-            EventSystem eventSystem = new GameObject().AddComponent<EventSystem>();
-            GameObject firstSelected = new GameObject();
-            SelectionManager selectionManager = new GameObject().AddComponent<SelectionManager>();
-            selectionManager.FirstSelected = firstSelected;
-            yield return null;
-
-            eventSystem.SetSelectedGameObject(null);
-            selectionManager.OnNavigate();
-            
-            Assert.AreEqual(firstSelected, eventSystem.currentSelectedGameObject);
-            Assert.AreEqual(firstSelected, selectionManager.LastSelectedGameObject);
+            Assert.AreEqual(_firstSelected,  _selectionManager.LastSelectedGameObject);
         }
         
-        [UnityTest]
-        public IEnumerator OnNavigate_ControlSelected_DoNothing()
+        [Test]
+        public void OnNavigate_NothingSelected_SelectControl()
         {
-            EventSystem eventSystem = new GameObject().AddComponent<EventSystem>();
-            GameObject firstSelected = new GameObject();
-            SelectionManager selectionManager = new GameObject().AddComponent<SelectionManager>();
-            selectionManager.FirstSelected = firstSelected;
-            yield return null;
-
+            _eventSystem.SetSelectedGameObject(null);
+            _selectionManager.OnNavigate();
+            
+            Assert.AreEqual(_firstSelected, _eventSystem.currentSelectedGameObject);
+            Assert.AreEqual(_firstSelected, _selectionManager.LastSelectedGameObject);
+        }
+        
+        [Test]
+        public void OnNavigate_ControlSelected_DoNothing()
+        {
             GameObject selected = new GameObject();
             selected.AddComponent<Button>();
-            eventSystem.SetSelectedGameObject(selected);
-            selectionManager.OnNavigate();
+            _eventSystem.SetSelectedGameObject(selected);
+            _selectionManager.OnNavigate();
             
-            Assert.AreEqual(firstSelected,  selectionManager.LastSelectedGameObject);
-            Assert.AreEqual(selected, eventSystem.currentSelectedGameObject);
+            Assert.AreEqual(_firstSelected,  _selectionManager.LastSelectedGameObject);
+            Assert.AreEqual(selected, _eventSystem.currentSelectedGameObject);
         }
         
-        [UnityTest]
-        public IEnumerator OnMouseMove_ControlSelected_SaveSelectedControl()
+        [Test]
+        public void OnMouseMove_ControlSelected_SaveSelectedControl()
         {
-            EventSystem eventSystem = new GameObject().AddComponent<EventSystem>();
-            GameObject firstSelected = new GameObject();
-            SelectionManager selectionManager = new GameObject().AddComponent<SelectionManager>();
-            selectionManager.FirstSelected = firstSelected;
-            yield return null;
-
             GameObject selected = new GameObject();
             selected.AddComponent<Button>();
-            eventSystem.SetSelectedGameObject(selected);
-            selectionManager.OnMouseMove();
+            _eventSystem.SetSelectedGameObject(selected);
+            _selectionManager.OnMouseMove();
             
-            Assert.AreEqual(selected,  selectionManager.LastSelectedGameObject);
-            Assert.AreEqual(selected, eventSystem.currentSelectedGameObject);
+            Assert.AreEqual(selected,  _selectionManager.LastSelectedGameObject);
+            Assert.AreEqual(selected, _eventSystem.currentSelectedGameObject);
         }
         
-        [UnityTest]
-        public IEnumerator OnMouseMove_NothingSelected_DoNothing()
+        [Test]
+        public void OnMouseMove_NothingSelected_DoNothing()
         {
-            EventSystem eventSystem = new GameObject().AddComponent<EventSystem>();
-            GameObject firstSelected = new GameObject();
-            SelectionManager selectionManager = new GameObject().AddComponent<SelectionManager>();
-            selectionManager.FirstSelected = firstSelected;
-            yield return null;
-
-            eventSystem.SetSelectedGameObject(null);
-            selectionManager.OnMouseMove();
+            _eventSystem.SetSelectedGameObject(null);
+            _selectionManager.OnMouseMove();
             
-            Assert.AreEqual(firstSelected,  selectionManager.LastSelectedGameObject);
-            Assert.AreEqual(null, eventSystem.currentSelectedGameObject);
+            Assert.AreEqual(_firstSelected,  _selectionManager.LastSelectedGameObject);
+            Assert.AreEqual(null, _eventSystem.currentSelectedGameObject);
         }
     }
 }
