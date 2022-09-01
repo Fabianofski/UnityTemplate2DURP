@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4644067967067922965}
+  - component: {fileID: 2615480480769215916}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -39,6 +40,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1180, y: 620.8664}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2615480480769215916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4644067967067922966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00105fc5643ceef45b5b10be4d3fe06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raiseSoundEvent: {fileID: 11400000, guid: ca1eca7eb3b3c154293af562b7eb9d9a, type: 2}
+  wooshSound: {fileID: 11400000, guid: a6225e476d2299d498c4df971e23ca2b, type: 2}
+  scaleTweenType: 2
+  tweenDuration: 0.3
+  delay: 0.02
 --- !u!1001 &2450139414218923485
 PrefabInstance:
   m_ObjectHideFlags: 0

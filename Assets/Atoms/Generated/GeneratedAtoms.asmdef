@@ -1,13 +1,11 @@
 {
-    "name": "UI",
+    "name": "GeneratedAtoms",
     "rootNamespace": "F4B1",
     "references": [
-        "GUID:29492541a59d04a81b47a7f225e8a22d",
+        "GUID:598750ec792e4472396f5fbc092caa65",
         "GUID:14165214884ae4a619bfb290f28194a7",
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:6230ca74b8a00db45b88062fb76152a4",
-        "GUID:a246dffad198cdc4b8e545dad94ac6de",
-        "GUID:5c38d445799b455b8021903b80b7f917"
+        "GUID:87264ae76e36244ae9adf5b5fbf7ca19",
+        "GUID:29492541a59d04a81b47a7f225e8a22d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -287,6 +287,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseToggled: {fileID: 11400000, guid: f85b82cdd999f924ab81d3f0ddc0eecc, type: 2}
+  pauseInputAction:
+    m_Name: Pause Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 02cc148a-af48-4bdd-a885-d59a519540a6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1dc1cf15-e66f-4f4c-ad1b-156c8b7df2f6
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 3741a4ed-32b4-4369-9f35-ef666d54c523
+      m_Path: <Keyboard>/p
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause Input
+      m_Flags: 0
+    m_Flags: 0
+  resetAtoms: []
 --- !u!114 &4631399522506307659
 MonoBehaviour:
   m_ObjectHideFlags: 0
