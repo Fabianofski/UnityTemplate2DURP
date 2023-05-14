@@ -7,36 +7,33 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace F4B1.UI
+public class SelectionManager : MonoBehaviour
 {
-    public class SelectionManager : MonoBehaviour
+    [SerializeField] private GameObject firstSelected;
+    private EventSystem _eventSystem;
+
+    public GameObject FirstSelected
     {
-        [SerializeField] private GameObject firstSelected;
-        private EventSystem _eventSystem;
+        set => firstSelected = value;
+    }
 
-        public GameObject FirstSelected
-        {
-            set => firstSelected = value;
-        }
+    public GameObject LastSelectedGameObject { get; private set; }
 
-        public GameObject LastSelectedGameObject { get; private set; }
+    private void Start()
+    {
+        _eventSystem = FindObjectOfType<EventSystem>();
+        LastSelectedGameObject = firstSelected;
+    }
 
-        private void Start()
-        {
-            _eventSystem = FindObjectOfType<EventSystem>();
-            LastSelectedGameObject = firstSelected;
-        }
+    public void OnNavigate()
+    {
+        if (_eventSystem.currentSelectedGameObject != null) return;
+        _eventSystem.SetSelectedGameObject(LastSelectedGameObject);
+    }
 
-        public void OnNavigate()
-        {
-            if (_eventSystem.currentSelectedGameObject != null) return;
-            _eventSystem.SetSelectedGameObject(LastSelectedGameObject);
-        }
-
-        public void OnMouseMove()
-        {
-            if (_eventSystem.currentSelectedGameObject == null) return;
-            LastSelectedGameObject = _eventSystem.currentSelectedGameObject;
-        }
+    public void OnMouseMove()
+    {
+        if (_eventSystem.currentSelectedGameObject == null) return;
+        LastSelectedGameObject = _eventSystem.currentSelectedGameObject;
     }
 }
