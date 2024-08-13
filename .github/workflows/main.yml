@@ -66,14 +66,11 @@ jobs:
           name: UnityTemplate-${{ matrix.targetPlatform.name }}
           path: build/${{ matrix.targetPlatform.platform }}
 
-      - name: Install Butler
-        run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/latest/archive/default
-          unzip -d butler butler.zip
-          sudo mv butler/butler /usr/local/bin/
-          butler -V
-
-      - name: Deploy to Itch.io
-        run: |
-          butler login --api-key ${{ secrets.BUTLER_CREDENTIALS }}
-          butler push build/${{ matrix.targetPlatform.platform }} f4b1/unity-template:${{ matrix.targetPlatform.name }}
+      - name: Deploy to itch.io
+        uses: josephbmanley/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: matrix.targetPlatform.name
+          ITCH_GAME: unity-template
+          ITCH_USER: f4b1
+          PACKAGE: build/${{ matrix.targetPlatform.platform }}
